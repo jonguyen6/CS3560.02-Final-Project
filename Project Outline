@@ -16,3 +16,6 @@ The system must be capable of managing:
 	- should properly show total grade for each student with correct weights applied to each category of assignments
 	- read only for students
 	- read and write for instructors
+-Notification/Inbox Tab
+	- Professors will be able to write a notification thats sent to all students	
+	- Students may only read
