@@ -11,4 +11,6 @@ module org.example.finalproject {
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
 
+    exports org.example.finalproject;
+
 }
