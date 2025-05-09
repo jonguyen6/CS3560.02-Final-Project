@@ -1,4 +1,4 @@
-# CS3560.02-Final-Project
+# Canvas Mockup
 GitHub repository for CS3560.02's final project by Johnny Nguyen, Daniel Chahbour, and Luis Felix
 
 Title: 
