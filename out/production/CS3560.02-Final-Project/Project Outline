@@ -1,0 +1,21 @@
+The system must be capable of managing:
+- user roles
+	- student: can only read things on the platform unless otherwise permitted by their instructor
+	- instructors: can invite/add students to courses. Has the ability to read and write any of their courses
+	- maybe a system admin?
+- courses
+	- course creation
+	- course visability/publication
+	- course archivability
+- assignments
+	- assignment creation
+	- assignment visabiliy/publication
+	- assignment submission
+	- should have a scaling factor based on course grade weights
+- grades
+	- should properly show total grade for each student with correct weights applied to each category of assignments
+	- read only for students
+	- read and write for instructors
+-Notification/Inbox Tab
+	- Professors will be able to write a notification thats sent to all students	
+	- Students may only read
