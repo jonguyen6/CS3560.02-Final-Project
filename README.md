@@ -8,3 +8,6 @@ This project aims to develop an online service for educational institute members
 grades, all while focusing on applying Object-Oriented Programming (OOP) principles for modularity, reusability,
 and maintainability. The system will support user roles, course management, assignment submission, 
 and grade tracking, ensuring efficient performance and scalability.
+
+Currently has a main method that prints sample data to console, with a main menu mockup of three buttons and images that
+would lead you to their respective users version of the portal
