@@ -5,11 +5,11 @@ The system must be capable of managing:
 	- maybe a system admin?
 - courses
 	- course creation
-	- course visability/publication
+	- course visibility/publication
 	- course archivability
 - assignments
 	- assignment creation
-	- assignment visabiliy/publication
+	- assignment visibility/publication
 	- assignment submission
 	- should have a scaling factor based on course grade weights
 - grades
@@ -17,5 +17,5 @@ The system must be capable of managing:
 	- read only for students
 	- read and write for instructors
 -Notification/Inbox Tab
-	- Professors will be able to write a notification thats sent to all students	
+	- Professors will be able to write a notification that's sent to all students
 	- Students may only read
