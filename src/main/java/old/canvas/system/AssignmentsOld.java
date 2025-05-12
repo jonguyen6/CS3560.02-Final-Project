@@ -1,12 +1,12 @@
-package org.example.finalproject;
+package old.canvas.system;
 
-public class Assignments{
+public class AssignmentsOld {
     private final String assignmentName; //stores assignmentName
     private boolean graded = false; //assignment has not been graded yet
     private double grade;
 
     //constructor to get assignment name
-    public Assignments(String assignment){
+    public AssignmentsOld(String assignment){
         this.assignmentName=assignment;
     }
 

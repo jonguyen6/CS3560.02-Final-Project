@@ -12,5 +12,6 @@ module org.example.finalproject {
     requires com.almasb.fxgl.all;
 
     exports org.example.finalproject;
+    exports old.canvas.system;
 
 }

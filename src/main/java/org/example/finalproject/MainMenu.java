@@ -6,8 +6,8 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class MainMenu extends Application {
@@ -22,9 +22,21 @@ public class MainMenu extends Application {
         Button instructorButton = new Button("Instructor");
         Button adminButton = new Button("Admin");
 
-        studentButton.setOnAction(e -> System.out.println("Student Dashboard"));
-        instructorButton.setOnAction(e -> System.out.println("Instructor Dashboard"));
-        adminButton.setOnAction(e -> System.out.println("Admin Dashboard"));
+        // Define actions for each button
+        studentButton.setOnAction(e -> {
+            Student student = new Student();
+            student.showMenu();
+        });
+
+        instructorButton.setOnAction(e -> {
+            Instructor instructor = new Instructor();
+            instructor.showMenu();
+        });
+
+        adminButton.setOnAction(e -> {
+            Admin admin = new Admin();
+            admin.showMenu();
+        });
 
         // Load Images
         ImageView studentImage = createImageView("/images/student.png");

@@ -1,12 +1,12 @@
-package org.example.finalproject;
+package old.canvas.system;
 
 import java.time.LocalTime;
 
-public class Courses {
+public class CoursesOld {
     //Name of the course
     private final String courseName;
     //instructor who created the course
-    private final Instructors instructor;
+    private final InstructorsOld instructor;
 
     //for the course scheduling
     private String day;
@@ -15,7 +15,7 @@ public class Courses {
 
 
     //creates a course object with a course name and instructor , the courses scheduling as well
-    public Courses(String nameOfCourse, Instructors instructor, String day, String startTime, String endTime) {
+    public CoursesOld(String nameOfCourse, InstructorsOld instructor, String day, String startTime, String endTime) {
         this.courseName = nameOfCourse;
         this.instructor = instructor;
         this.day = day;
@@ -29,7 +29,7 @@ public class Courses {
     }
 
     //will return instructor name
-    public Instructors getInstructor() {
+    public InstructorsOld getInstructor() {
         return instructor;
     }
 
@@ -48,7 +48,7 @@ public class Courses {
         return classEndTime;
     }
 
-    public boolean conflicts(Courses x) {
+    public boolean conflicts(CoursesOld x) {
         //not on the same day means no conflicts
         if (!this.day.equalsIgnoreCase(x.day)) {
             return false;

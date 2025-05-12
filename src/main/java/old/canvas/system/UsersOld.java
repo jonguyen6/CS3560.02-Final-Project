@@ -1,6 +1,6 @@
-package org.example.finalproject;
+package old.canvas.system;
 
-public abstract class Users {
+public abstract class UsersOld {
     //abstract will force all different forms of users to comply with same demands as in this users class
 
     protected String userName;
@@ -11,7 +11,7 @@ public abstract class Users {
 
     //name = The instructors/Students name
     //currentStatus = Instructor or Student
-    Users(String name,String currentStatus){
+    UsersOld(String name, String currentStatus){
         this.userName=name;
         this.userRoles=currentStatus;
     }
