@@ -20,33 +20,13 @@ public class MainMenu extends Application {
     @Override
     public void start(Stage primaryStage) {
         // Create buttons
-        Button studentButton = new Button("Student");
-        Button instructorButton = new Button("Instructor");
-        Button adminButton = new Button("Admin");
+        Button launchButton = new Button("Launch Canvas");
 
         // Define actions for each button
-        studentButton.setOnAction(e -> {
-            Login studentLogin = new Login();
+        launchButton.setOnAction(e -> {
+            Login canvasLogin = new Login();
             try {
-                studentLogin.showLogin("/Login.fxml");
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
-        });
-
-        instructorButton.setOnAction(e -> {
-            Login instructorLogin = new Login();
-            try {
-                instructorLogin.showLogin("/Login.fxml");
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
-        });
-
-        adminButton.setOnAction(e -> {
-            Login adminLogin = new Login();
-            try {
-                adminLogin.showLogin("/Login.fxml");
+                canvasLogin.showLogin("/Login.fxml");
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
@@ -54,21 +34,16 @@ public class MainMenu extends Application {
 
         // Load Images
         ImageView studentImage = createImageView("/images/student.png");
-        ImageView instructorImage = createImageView("/images/instructor.png");
-        ImageView adminImage = createImageView("/images/admin.png");
+
 
         // Create VBox for each image-button pair
-        VBox studentBox = new VBox(10, studentImage, studentButton);
-        studentBox.setStyle("-fx-alignment: center;");
+        VBox loginBox = new VBox(10, studentImage, launchButton);
+        loginBox.setStyle("-fx-alignment: center;");
 
-        VBox instructorBox = new VBox(10, instructorImage, instructorButton);
-        instructorBox.setStyle("-fx-alignment: center;");
 
-        VBox adminBox = new VBox(10, adminImage, adminButton);
-        adminBox.setStyle("-fx-alignment: center;");
 
         // Layout
-        HBox mainLayout = new HBox(20, studentBox, instructorBox, adminBox);
+        HBox mainLayout = new HBox(20, loginBox);
         mainLayout.setStyle("-fx-alignment: center;");
 
         BorderPane layout = new BorderPane();
@@ -81,7 +56,7 @@ public class MainMenu extends Application {
         primaryStage.show();
     }
 
-    // Function/Method for adding images for each profile
+    // Function/Method for adding images for each profile (profiles on this menu got scrapped so this is only used for one image now)
     private ImageView createImageView(String path) {
         ImageView imageView = new ImageView();
         try {

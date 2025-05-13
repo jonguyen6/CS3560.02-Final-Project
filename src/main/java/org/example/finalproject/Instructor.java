@@ -1,6 +1,7 @@
 package org.example.finalproject;
 
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
@@ -23,9 +24,8 @@ import java.util.Set;
 
 public class Instructor {
 
-    // Set to keep track of already graded assignments
     private Set<String> gradedAssignments = new HashSet<>();
-    private VBox assignmentsPage;  // The VBox that holds the assignments list
+    private VBox assignmentsPage;
 
     public void showMenu() {
         Stage stage = new Stage();
@@ -42,27 +42,26 @@ public class Instructor {
         BorderPane layout = new BorderPane(tabPane);
         layout.setStyle("-fx-padding: 20px;");
 
-        Scene scene = new Scene(layout, 400, 300);
+        Scene scene = new Scene(layout, 500, 500);
         stage.setScene(scene);
         stage.show();
     }
 
     private VBox createAssignmentsPage() {
-        assignmentsPage = new VBox();
+        assignmentsPage = new VBox(10);
         assignmentsPage.setStyle("-fx-padding: 20px; -fx-alignment: center;");
 
         try (BufferedReader reader = new BufferedReader(new FileReader("assignments.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                // Only display the assignment if it hasn't been graded yet
                 if (!gradedAssignments.contains(line)) {
                     HBox assignmentBox = new HBox(10);
                     Label assignmentLabel = new Label(line);
                     TextField gradeField = new TextField();
-                    gradeField.setPromptText("Enter Grade");
+                    gradeField.setPromptText("Enter Grade from 1-100");
                     Button submitGradeButton = new Button("Submit Grade");
                     String finalLine = line;
-                    submitGradeButton.setOnAction(e -> submitGrade(finalLine, gradeField.getText()));
+                    submitGradeButton.setOnAction(e -> handleGradeSubmission(finalLine, gradeField));
 
                     assignmentBox.getChildren().addAll(assignmentLabel, gradeField, submitGradeButton);
                     assignmentsPage.getChildren().add(assignmentBox);
@@ -75,27 +74,33 @@ public class Instructor {
         return assignmentsPage;
     }
 
+    private void handleGradeSubmission(String assignmentText, TextField gradeField) {
+        String grade = gradeField.getText().trim();
+
+        if (grade.isEmpty()) {
+            showAlert("Error", "Grade cannot be empty.");
+        } else {
+            submitGrade(assignmentText, grade);
+        }
+    }
+
     private void submitGrade(String assignmentText, String grade) {
-        // Mark the assignment as graded
         gradedAssignments.add(assignmentText);
 
-        // Save the grade to the grades.txt file
         try (FileWriter writer = new FileWriter("grades.txt", true)) {
             writer.write(assignmentText + " - Grade: " + grade + "\n");
         } catch (IOException e) {
             System.err.println("Error saving grade: " + e.getMessage());
         }
 
-        // Delete the graded assignment from the assignments.txt file
         deleteAssignmentFromFile(assignmentText);
 
-        // Update the UI: Remove the graded assignment from the list
         updateAssignmentsPage();
     }
 
     private void deleteAssignmentFromFile(String assignmentText) {
-        // Read all the assignments and filter out the graded one
         List<String> remainingAssignments = new ArrayList<>();
+
         try (BufferedReader reader = new BufferedReader(new FileReader("assignments.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -107,7 +112,6 @@ public class Instructor {
             System.err.println("Error reading assignments: " + e.getMessage());
         }
 
-        // Rewrite the assignments file without the graded assignment
         try (FileWriter writer = new FileWriter("assignments.txt")) {
             for (String assignment : remainingAssignments) {
                 writer.write(assignment + "\n");
@@ -117,24 +121,20 @@ public class Instructor {
         }
     }
 
-
     private void updateAssignmentsPage() {
-        // Remove all children from the VBox and refresh the list
         assignmentsPage.getChildren().clear();
 
-        // Rebuild the assignment list with only ungraded assignments
         try (BufferedReader reader = new BufferedReader(new FileReader("assignments.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                // Only display the assignment if it hasn't been graded yet
                 if (!gradedAssignments.contains(line)) {
                     HBox assignmentBox = new HBox(10);
                     Label assignmentLabel = new Label(line);
                     TextField gradeField = new TextField();
-                    gradeField.setPromptText("Enter Grade");
+                    gradeField.setPromptText("Enter Grade from 1-100");
                     Button submitGradeButton = new Button("Submit Grade");
                     String finalLine = line;
-                    submitGradeButton.setOnAction(e -> submitGrade(finalLine, gradeField.getText()));
+                    submitGradeButton.setOnAction(e -> handleGradeSubmission(finalLine, gradeField));
 
                     assignmentBox.getChildren().addAll(assignmentLabel, gradeField, submitGradeButton);
                     assignmentsPage.getChildren().add(assignmentBox);
@@ -143,5 +143,13 @@ public class Instructor {
         } catch (IOException e) {
             assignmentsPage.getChildren().add(new Label("Error loading assignments."));
         }
+    }
+
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

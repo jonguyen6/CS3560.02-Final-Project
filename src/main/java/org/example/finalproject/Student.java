@@ -1,6 +1,7 @@
 package org.example.finalproject;
 
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
@@ -36,7 +37,7 @@ public class Student {
         BorderPane layout = new BorderPane(tabPane);
         layout.setStyle("-fx-padding: 20px;");
 
-        Scene scene = new Scene(layout, 400, 300);
+        Scene scene = new Scene(layout, 500, 500);
         stage.setScene(scene);
         stage.show();
     }
@@ -50,11 +51,30 @@ public class Student {
         assignmentArea.setPromptText("Enter assignment text...");
 
         Button submitButton = new Button("Submit");
-        submitButton.setOnAction(e -> submitAssignment(assignmentArea.getText()));
+        submitButton.setOnAction(e -> handleAssignmentSubmission(assignmentArea));
 
         assignmentsPage.getChildren().addAll(instructionLabel, assignmentArea, submitButton);
 
         return assignmentsPage;
+    }
+
+    private void handleAssignmentSubmission(TextArea assignmentArea) {
+        String assignmentText = assignmentArea.getText().trim();
+
+        if (assignmentText.isEmpty()) {
+            showAlert("Error", "Assignment text cannot be empty.");
+        } else {
+            submitAssignment(assignmentText);
+            assignmentArea.clear(); // Clear the text area after submission
+        }
+    }
+
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
     private VBox createGradesPage() {
