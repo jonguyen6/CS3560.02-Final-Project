@@ -10,6 +10,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class MainMenu extends Application {
 
     private static final double IMAGE_WIDTH = 100;
@@ -24,18 +26,30 @@ public class MainMenu extends Application {
 
         // Define actions for each button
         studentButton.setOnAction(e -> {
-            Student student = new Student();
-            student.showMenu();
+            Login studentLogin = new Login();
+            try {
+                studentLogin.showLogin("/Login.fxml");
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
         });
 
         instructorButton.setOnAction(e -> {
-            Instructor instructor = new Instructor();
-            instructor.showMenu();
+            Login instructorLogin = new Login();
+            try {
+                instructorLogin.showLogin("/Login.fxml");
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
         });
 
         adminButton.setOnAction(e -> {
-            Admin admin = new Admin();
-            admin.showMenu();
+            Login adminLogin = new Login();
+            try {
+                adminLogin.showLogin("/Login.fxml");
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
         });
 
         // Load Images
@@ -67,6 +81,7 @@ public class MainMenu extends Application {
         primaryStage.show();
     }
 
+    // Function/Method for adding images for each profile
     private ImageView createImageView(String path) {
         ImageView imageView = new ImageView();
         try {
@@ -80,6 +95,8 @@ public class MainMenu extends Application {
         imageView.setPreserveRatio(true);
         return imageView;
     }
+
+
 
     public static void main(String[] args) {
         launch(args);
